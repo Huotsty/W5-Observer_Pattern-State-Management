@@ -16,18 +16,32 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int _currentIndex = 0;
+ 
+  @override
   Widget build(BuildContext context) {
-    int currentIndex = Provider.of<CounterModel>(context).currentIndex;
+    print('home screen is built');
     return Scaffold(
-      body: currentIndex == 0 ? const ColorTapsScreen() : const StatisticsScreen(),
+      body:
+          _currentIndex == 0
+              ? ColorTapsScreen()
+              : StatisticsScreen(),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (index) => Provider.of<CounterModel>(context, listen: false).updateIndex(index),
-        items: const [
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.tap_and_play),
             label: 'Taps',
@@ -47,14 +61,31 @@ class ColorTapsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final counter = Provider.of<CounterModel>(context);
-
+    print('color taps screen is built');
     return Scaffold(
       appBar: AppBar(title: const Text('Color Taps')),
       body: Column(
         children: [
-          ColorTap(type: CardType.red, tapCount: counter.redTapCount, onTap: counter.incrementRedTap),
-          ColorTap(type: CardType.blue, tapCount: counter.blueTapCount, onTap: counter.incrementBlueTap),
+          Selector<CounterModel, int>(
+            selector: (context, counter) => counter.redTapCount,
+            builder: (context, redTapCount, child) {
+              return ColorTap(
+                type: CardType.red,
+                tapCount: redTapCount,
+                onTap: context.read<CounterModel>().incrementRedTap,
+              );
+            },
+          ),
+          Selector<CounterModel, int>(
+            selector: (context, counter) => counter.blueTapCount,
+            builder: (context, blueTapCount, child) {
+              return ColorTap(
+                type: CardType.blue,
+                tapCount: blueTapCount,
+                onTap: context.read<CounterModel>().incrementBlueTap,
+              );
+            },
+          ),
         ],
       ),
     );
@@ -105,17 +136,20 @@ class StatisticsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final counter = Provider.of<CounterModel>(context);
-
+    print('StatisticsScreen rebuilt');
     return Scaffold(
       appBar: AppBar(title: const Text('Statistics')),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Red Taps: ${counter.redTapCount}', style: const TextStyle(fontSize: 24)),
-            Text('Blue Taps: ${counter.blueTapCount}', style: const TextStyle(fontSize: 24)),
-          ],
+        child: Consumer<CounterModel>(
+          builder: (context, counter, child) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Red Taps: ${counter.redTapCount}', style: const TextStyle(fontSize: 24)),
+                Text('Blue Taps: ${counter.blueTapCount}', style: const TextStyle(fontSize: 24)),
+              ],
+            );
+          },
         ),
       ),
     );
