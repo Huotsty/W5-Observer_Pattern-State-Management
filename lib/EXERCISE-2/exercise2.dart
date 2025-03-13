@@ -110,6 +110,7 @@ class ColorTap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('color tap is built');
     return GestureDetector(
       onTap: onTap,
       child: Container(

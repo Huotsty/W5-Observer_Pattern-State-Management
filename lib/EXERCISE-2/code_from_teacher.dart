@@ -37,19 +37,20 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    print('home screen is built');
     return Scaffold(
       body:
-      _currentIndex == 0
-          ? ColorTapsScreen(
-        redTapCount: redTapCount,
-        blueTapCount: blueTapCount,
-        onRedTap: _incrementRedTapCount,
-        onBlueTap: _incrementBlueTapCount,
-      )
-          : StatisticsScreen(
-        redTapCount: redTapCount,
-        blueTapCount: blueTapCount,
-      ),
+          _currentIndex == 0
+              ? ColorTapsScreen(
+                redTapCount: redTapCount,
+                blueTapCount: blueTapCount,
+                onRedTap: _incrementRedTapCount,
+                onBlueTap: _incrementBlueTapCount,
+              )
+              : StatisticsScreen(
+                redTapCount: redTapCount,
+                blueTapCount: blueTapCount,
+              ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
@@ -87,6 +88,7 @@ class ColorTapsScreen extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    print('color taps screen is built');
     return Scaffold(
       appBar: AppBar(title: Text('Color Taps')),
       body: Column(
@@ -119,6 +121,7 @@ class ColorTap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('color tap is built');
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -152,6 +155,7 @@ class StatisticsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('StatisticsScreen rebuilt');
     return Scaffold(
       appBar: AppBar(title: Text('Statistics')),
       body: Center(
