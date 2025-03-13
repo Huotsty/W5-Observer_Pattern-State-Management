@@ -15,4 +15,4 @@ class CounterModel extends ChangeNotifier {
     _blueTapCount++;
     notifyListeners();
   }
-  }
+}
