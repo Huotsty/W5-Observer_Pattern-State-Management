@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/course.dart';
+
 import 'course_screen.dart';
 
 const Color mainColor = Colors.blue;

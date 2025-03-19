@@ -1,6 +1,5 @@
-import 'package:week5/EX-1-START-CODE/models/course.dart';
 
-
+import '../models/course.dart';
 import 'courses_repository.dart';
 
 class CourseMockRepository extends CourseRepository{

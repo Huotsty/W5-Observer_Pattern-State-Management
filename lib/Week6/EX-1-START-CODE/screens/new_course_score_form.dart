@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:week5/EX-1-START-CODE/providers/courses_provider.dart';
+import 'package:week5/Week6/EX-1-START-CODE/providers/courses_provider.dart';
 
 import '../models/course.dart';
 import '../theme/theme.dart';

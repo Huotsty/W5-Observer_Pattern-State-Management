@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:week5/EX-1-START-CODE/screens/new_course.dart';
-
+import 'package:week5/Week6/EX-1-START-CODE/screens/new_course.dart';
 
 import '../models/course.dart';
 import '../providers/courses_provider.dart';

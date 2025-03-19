@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:week5/EX-1-START-CODE/repositories/courses_repository.dart';
-
+import 'package:week5/Week6/EX-1-START-CODE/repositories/courses_repository.dart';
 
 import '../models/course.dart';
-class CourseProvider with ChangeNotifier{
+
+
+class CourseProvider extends ChangeNotifier{
   final CourseRepository repository;
   List<Course> _courses = [];
   CourseProvider({required this.repository}){

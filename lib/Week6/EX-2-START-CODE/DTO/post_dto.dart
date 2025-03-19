@@ -1,4 +1,4 @@
-import 'package:week5/EX-2-START-CODE/model/post.dart';
+import 'package:week5/Week6/EX-2-START-CODE/model/post.dart';
 
 class PostDTO{
   final int id;
