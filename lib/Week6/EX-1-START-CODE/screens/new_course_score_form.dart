@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:week5/EX-1-START-CODE/providers/courses_provider.dart';
 
 import '../models/course.dart';
 import '../theme/theme.dart';
@@ -28,9 +30,14 @@ class _NewCourseScoreFormState extends State<NewCourseScoreForm> {
 
     if (isValid) {
       _formKey.currentState!.save();
-      Navigator.of(context).pop(
-        CourseScore(studentName: _enteredName, studentScore: _enteredScore),
-      );
+      // Navigator.of(context).pop(
+      //   CourseScore(studentName: _enteredName, studentScore: _enteredScore),
+      // );
+      Provider.of<CourseProvider>(
+                    context,
+                    listen: false,
+                  ).addScore(widget.course.name, CourseScore(studentName: _enteredName, studentScore: _enteredScore));
+                  Navigator.of(context).pop();
     }
   }
   String? validateName(String? value) {

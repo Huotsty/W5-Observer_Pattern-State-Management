@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:week5/EX-1-START-CODE/repositories/courses_repository.dart';
 
+
 import '../models/course.dart';
 class CourseProvider with ChangeNotifier{
   final CourseRepository repository;
@@ -17,7 +18,6 @@ class CourseProvider with ChangeNotifier{
   Course getCourseFor(String courseId){
     return _courses.firstWhere((course)=> course.name == courseId);
   }
-
   void addCourse(Course course){
     _courses.add(course);
     notifyListeners();

@@ -4,6 +4,7 @@ import 'package:week5/EX-1-START-CODE/providers/courses_provider.dart';
 import 'package:week5/EX-1-START-CODE/repositories/courses_mock_repository.dart';
 import 'package:week5/EX-1-START-CODE/screens/new_course_list_screen.dart';
 
+
 void main() {
   runApp(ChangeNotifierProvider(
       create: (context) => CourseProvider(repository: CourseMockRepository()),

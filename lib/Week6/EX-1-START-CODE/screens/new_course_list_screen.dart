@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:week5/EX-1-START-CODE/screens/new_course.dart';
 
 
 import '../models/course.dart';
@@ -18,18 +19,32 @@ class NewCourseListScreen extends StatelessWidget {
         MaterialPageRoute(builder: (ctx) => NewCourseScreen(course: course)),
       );
     }
+    void addCourse() async {
+     await Navigator.of(
+        context,
+      ).push(MaterialPageRoute(builder: (ctx) => NewCourse()));
+    }
     return Scaffold(
-      appBar: AppBar(backgroundColor: mainColor,
-        title: const Text('SCORE APP', style: TextStyle(color: Colors.white)),),
+      appBar: AppBar(
+        backgroundColor: mainColor,
+        title: const Text('SCORE APP', style: TextStyle(color: Colors.white)),
+        actions: [
+          IconButton(onPressed: addCourse, icon: const Icon(Icons.add)),
+        ],
+      ),
       body: Consumer<CourseProvider>(
-        builder: (context, provider, child){
+        builder: (context, provider, child) {
+          final courses = provider.courses;
+          if (courses.isEmpty) {
+            return Center(child: Text('No courses added yet!'));
+          }
           return ListView.builder(
-              itemCount: provider.courses.length,
-              itemBuilder: (context, index)=>
-                Dismissible(key: Key(provider.courses[index].name),
-                    onDismissed: (_) => provider.courses.removeAt(index),
-                    child: CourseTile(course: provider.courses[index], onEdit: editCourse,
-                    )
+            itemCount: courses.length,
+            itemBuilder:
+                (context, index) => Dismissible(
+                  key: Key(courses[index].name),
+                  onDismissed: (_) => courses.removeAt(index),
+                  child: CourseTile(course: courses[index], onEdit: editCourse),
                 ),
           );
         },
@@ -37,7 +52,6 @@ class NewCourseListScreen extends StatelessWidget {
     );
   }
 }
-
 
 class CourseTile extends StatelessWidget {
   const CourseTile({super.key, required this.course, required this.onEdit});

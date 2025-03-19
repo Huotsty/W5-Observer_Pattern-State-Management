@@ -1,5 +1,6 @@
 import 'package:week5/EX-1-START-CODE/models/course.dart';
 
+
 import 'courses_repository.dart';
 
 class CourseMockRepository extends CourseRepository{
@@ -16,5 +17,10 @@ class CourseMockRepository extends CourseRepository{
   @override
   List<Course> getCourses() {
     return _courses;
+  }
+  
+  @override
+  void addCourse(Course course) {
+    _courses.add(course);
   }
 }
